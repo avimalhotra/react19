@@ -1,8 +1,9 @@
+const year = 2025;
 export default function Footer() {
   return (
-    <>
-      <p>&copy; 2025</p>
+    <footer>
+      <p>&copy; {year}</p>
       <p>All Rights Reserved</p>
-    </>
+    </footer>
   );
 }
