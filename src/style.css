@@ -1,12 +1,23 @@
-* {
+*,
+::before,
+::after {
   margin: 0;
   box-sizing: border-box;
+}
+label {
+  display: inline-block;
+}
+img {
+  vertical-align: bottom;
+}
+.img-resp {
+  max-width: 100%;
+  height: auto;
 }
 
 html {
   font-size: 12px;
 }
-
 body {
   font: 16px/1.3 system-ui, sans-serif;
 }
@@ -15,6 +26,50 @@ body {
   max-width: 1320px;
   margin: auto;
   padding: 0 1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.col-1 {
+  grid-column: span 1;
+}
+.col-2 {
+  grid-column: span 2;
+}
+.col-3 {
+  grid-column: span 3;
+}
+.col-4 {
+  grid-column: span 4;
+}
+.col-5 {
+  grid-column: span 5;
+}
+.col-6 {
+  grid-column: span 6;
+}
+.col-7 {
+  grid-column: span 7;
+}
+.col-8 {
+  grid-column: span 8;
+}
+.col-9 {
+  grid-column: span 9;
+}
+.col-10 {
+  grid-column: span 10;
+}
+.col-11 {
+  grid-column: span 11;
+}
+.col-12 {
+  grid-column: span 12;
 }
 
 p {
@@ -49,16 +104,37 @@ h4 {
   background: #ccc;
 }
 
-label {
-  display: inline-block;
-}
-
 .input {
   padding: 0.5rem 1rem;
   border: 1px solid #888;
   border-radius: 5px;
   background: transparent;
   margin: 0.5rem;
+}
+
+.card {
+  box-shadow: 0 0 5px #0008;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+  h3 {
+    margin: 1rem 0;
+  }
+  p {
+    margin: 1rem 0;
+  }
+  .offer {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: #800;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 5px;
+  }
 }
 
 header {

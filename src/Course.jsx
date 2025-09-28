@@ -8,7 +8,7 @@ export default function Course() {
       <h2>Course Component</h2>
       <Image src="vite.svg" alt="vite logo" width={32} height={32} />
       <Image
-        src="react.svg"
+        src="src/assets/react.svg"
         alt="react logo"
         width={32}
         height={32}
@@ -24,6 +24,10 @@ export default function Course() {
       </label>
       <Button label="Login" />
       <Button label="Sign Up" />
+      {/* <form>
+        <Input id="email" name="email" type="email" />
+        <Button type="submit" label="Submit" />
+      </form> */}
     </section>
   );
 }
