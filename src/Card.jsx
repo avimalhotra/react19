@@ -6,7 +6,7 @@ function Card({
   price = 0,
   desc = "lorem ipsul dolor",
   offer = "0%",
-}) {
+}){
   return (
     <section className="card">
       <span className="offer">{offer} off</span>
