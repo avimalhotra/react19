@@ -15,7 +15,6 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <div className="container">
     <Header />
-    <Course />
     {/* <div className="row">
       <div className="col-3">
         <Card title="Iphone 16" mrp={100} price={90} offer="30%" />
@@ -30,7 +29,8 @@ root.render(
         <Card />
       </div>
     </div> */}
-    <Counter></Counter>
+    {/* <Counter></Counter> */}
+    <Course />
     <Footer />
   </div>
 );
