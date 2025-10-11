@@ -1,9 +1,10 @@
 import { createRoot } from "react-dom/client";
 import Header from "./Header";
-import Course from "./Course";
+// import Course from "./Course";
 // import Card from "./Card";
 import Footer from "./Footer";
-import Counter from "./Counter";
+// import Counter from "./Counter";
+import { Example } from "./Example";
 import "./style.css";
 
 const root = createRoot(document.getElementById("root"));
@@ -30,7 +31,8 @@ root.render(
       </div>
     </div> */}
     {/* <Counter></Counter> */}
-    <Course />
+    {/* <Course /> */}
+    <Example />
     <Footer />
   </div>
 );
