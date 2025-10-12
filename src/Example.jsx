@@ -1,78 +1,108 @@
 import { useState } from "react";
 
 export function Example() {
-  function sayHi(name) {
-    console.log(`Hello ${name}`);
-  }
+  
+    const [car,setCar]=useState({name:"", power:0, torque:0});
 
-  const [email, setEmail] = useState("");
-  const [range, setRange] = useState(0);
-  const [city, setCity] = useState("");
+    // function changeData(){setCar({...car, power:90, name:"alto"});}
+    function updateData(e){
+      const {name,value}=e.target;
+      setCar(x=>({...x,[name]:value}))
+    }
 
-  function changeEmail(email) {
-    setEmail(email);
-  }
+    function sendData(e){
+      e.preventDefault();
+      console.log("send");
+    }
 
-  function sendData(e) {
-    e.preventDefault();
-    console.log("submitted");
-  }
+    // const cars=["swift","brezza","alto","i20","creta"];
+    const nums=[1,2,4,5,7,10,21,33];
+    const even=nums.filter(i=>i%2==0);
+    const total=nums.reduce((x,y)=>x+y);
 
-  function changeRange(range) {
-    setRange(range);
-  }
+    const data=[
+            { id:1, "name": "swift", "type": "hatchback", "price":870000},
+            { id:2, "name": "dzire", "type": "sedan", "price":980000},
+            { id:3, "name": "ciaz", "type": "sedan", "price":1100000},
+            { id:4, "name": "baleno", "type": "hatchback", "price":880000},
+            { id:5, "name": "fronx", "type": "hatchback", "price":1150000},
+            { id:6, "name": "brezza", "type": "suv", "price":1250000},
+            { id:7, "name": "grand vitara", "type": "suv", "price":1990000},
+            { id:8, "name": "alto", "type": "hatchback", "price":400000},
+            { id:9, "name": "wagon r", "type": "hatchback", "price":500000},
+            { id:10, "name": "jimny", "type": "suv", "price":1400000}
+      ];
 
-  function changeCity(city) {
-    setCity(city);
-  }
+    const hatch=data.filter(i=>i.type=="hatchback");
+
+
+    function HelloAdmin(prop){
+      console.log( prop );
+      
+      if(prop.role=="admin"){
+        return <h2>Hello Admin</h2>
+      }
+      else if(prop.role=="moderator"){
+      return <h2>Hello Moderator</h2>
+      }
+      else{
+         return <h2>Hello User</h2>
+      }
+    }
+
 
   return (
     <>
       <h2>Examples</h2>
-      {/* <button className="btn" onClick={sayHi}>Hello</button> */}
-      {/* <button className="btn" onClick={() => sayHi("Avi")}>Hello</button> */}
+
+      {/* <button className="btn" onClick={changeData}>Change</button> */}
+
       <form onSubmit={sendData}>
-        <label>
-          Email:{" "}
-          <input
-            className="input"
-            type="email"
-            name="email"
-            value={email}
-            onInput={(e) => changeEmail(e.target.value)}
-            required
-          />
-        </label>
-        <output>{email}</output>
-        <label>
-          Password:{" "}
-          <input className="input" type="password" name="pass" required />
-        </label>
-        <button className="btn">Login</button>
+        <label>Name: <input className="input" type="text" name="name" onChange={updateData}/></label>
+        <label>Power: <input className="input" type="number" name="power" onChange={updateData}/></label>
+        <label>Torque: <input className="input" type="number" name="torque" onChange={updateData}/></label>
+        <button className="btn">Send</button>
       </form>
-      <label>
-        Range:{" "}
-        <input
-          type="range"
-          min={0}
-          max={100}
-          value={range}
-          onChange={(e) => changeRange(e.target.value)}
-        />
-      </label>
-      <output>{range}</output>
+
+      <p>Name: {car.name}, Power: {car.power}, Torque: {car.torque}</p>
+
       <hr />
-      <label>
-        City:
-        <select onChange={(e) => changeCity(e.target.value)}>
-          <option selected disabled value="">
-            --Change City--
-          </option>
-          <option>New Delhi</option>
-          <option>Chennai</option>
-        </select>{" "}
-      </label>{" "}
-      <output>City: {city}</output>
+
+      {/* <ol>
+          {cars.map((car,index)=>(
+            <li key={index}>{car}</li>
+          ))}
+      </ol> */}
+
+      <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+              {
+                hatch.map((car)=>(
+                  <tr key={car.id}><td>{car.name}</td><td>{car.type}</td><td>{car.price}</td></tr>
+                ))
+              }
+          </tbody>  
+      </table>
+     
+      <hr />
+      <ol>
+            {even.map((num,index)=>(<li key={index}>{num}</li>))}
+      </ol>
+
+      <hr />
+      <p>{total}</p>
+
+      <hr />
+
+      <HelloAdmin role="moderator" />
+      
     </>
   );
 }

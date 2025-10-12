@@ -36,3 +36,4 @@ root.render(
     <Footer />
   </div>
 );
+
