@@ -1,44 +1,39 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import Child from './Child';
 
-export function Example() {
 
-    const ref=useRef(0);          // initial value;
-    const refInputName=useRef(null);
-    const refInputMail=useRef(null);
 
-    console.log(ref);
+export default function Example() {   
+
+  const [counter,setCounter]=useState(0);
+
     
-    // ref.current=1;
-    
-    // console.log(ref);
+  const items = [
+    {name:"paper", price: 10 }, 
+    {name:"pen", price: 20 }, 
+    {name:"glue", price: 30 }
+  ];
 
-    // console.log( refInputName );
-
-
-    function focusInput(){
-        // refInputName.current.focus();
-        refInputMail.current.focus();
-    }
-
-    function changeRef(){
-      ref.current=ref.current+1;
-       console.log(ref);
-    }
   
+  // const sum=items.reduce((sum,item)=>sum + item.price, 0);              // ✅
+  // console.log( sum );
+
+
   return (
     <>
-      <h2>Form Example</h2>
+      <h2>State Management</h2>
 
-      {/* <p>ref: {ref.current}</p> */}
-
-      <label>Name: <input type="text" ref={refInputName} /> </label>
-      <label>Email: <input type="text" ref={refInputMail} /> </label>
-
-      <button onClick={focusInput}>Click</button>
+      <button className="btn" onClick={()=>setCounter(counter-1)}>-</button>
+      <output className="counter">{counter}</output>
+      <button className="btn" onClick={()=>setCounter(counter+1)}>+</button>
+      <button className="btn" onClick={()=>setCounter(0)}>Reset</button>
 
       <hr />
 
-      <button onClick={changeRef}>Change</button> <span>{ref.current}</span>
+
+
+      <hr />
+      <Child count={counter} setCount={setCounter} />
 
   </>
   );

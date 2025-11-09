@@ -1,11 +1,7 @@
-// export default function Button(props) {
-//   return <button type={props.type} className="btn">{props.label}</button>;
-// }
-
-export default function Button({ type = "button", label = "Button" }) {
+export default function Button({ type = "button", label = "Button", x }) {
   return (
     <button type={type} className="btn">
-      {label}
+      {x}
     </button>
   );
 }

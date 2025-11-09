@@ -160,6 +160,8 @@ main {
 
 form  div{ margin: 1rem 0;}
 
+.counter{ display: inline-block; width: 30px; text-align: center; }
+
 footer {
   padding: 1rem 0;
 }
