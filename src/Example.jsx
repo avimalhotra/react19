@@ -1,78 +1,94 @@
-import { useState, useReducer, useMemo } from "react";
+import { useState, useEffect } from "react";
 
-export default function Example() {   
+export default function Example() {
+  const [data, setData] = useState([]);
+  const [sort, setSort] = useState("asc");
 
-  /* counter */
-  // const initialState={count:0};
-  // function reducer(state,action){
-  //     switch(action.type){
-  //       case "inc": return {count:state.count+1};
-  //       case "dec": return {count:state.count-1};
-  //       case "reset": return {count:0};
-  //       default : return state
-  //     }
-  // }
-  // const [state,dispatch]=useReducer(reducer,initialState);
+  async function fetchApi() {
+    const url = "https://jsonplaceholder.typicode.com/users";
 
-  /* form  */
-
-  const initialState={name:"", email:"", age:0};
-
-   function reducer(state,action){
-    switch(action.type){
-      case "setName" : return {...state,name:action.value};
-      case "setEmail" : return {...state,email:action.value};
-      case "setAge" : return {...state,age:action.value};
-      case "reset" : return initialState;
-      default : return state;
+    try {
+      const res = await fetch(url);
+      const res2 = await res.json();
+      setData(res2);
+    } catch (err) {
+      console.warn(err);
     }
-  };
-
-  function handleSubmit(e){
-      e.preventDefault();
-      console.log(state);
   }
 
-  const [state,dispatch]=useReducer(reducer,initialState);
+  useEffect(() => {
+    fetchApi();
+  }, []);
 
+  function sortData(x = "id", y = sort) {
+    setSort(y === "asc" ? "desc" : "asc");
 
-  /* useMemo */
-
-  const [count, setCount] = useState(0);
-
-  const heavyTask=useMemo(()=>{
-    let result=0;
-    for(let i=0; i<1000000000; i++){
-      result+=i;
-    }
-    return result;
-  },[]);
-
+    data.sort((a, b) => {
+      if (a[x] > b[x]) {
+        return y === "asc" ? 1 : -1;
+      } else {
+        return y === "asc" ? -1 : 1;
+      }
+    });
+    setData([...data]);
+  }
 
   return (
     <>
-      <h2>Example Component</h2>
+      <h2>API Example</h2>
 
-      {/* <button className="btn" onClick={()=>dispatch({type:"inc"})}>Increment</button>
-      <button className="btn" onClick={()=>dispatch({type:"dec"})}>Decrement</button>
-      <button className="btn" onClick={()=>dispatch({type:"reset"})}>Reset</button>
-      <output>{state.count}</output> */}
-
-
-      {/* <form onSubmit={handleSubmit}>
-        <label>Name: <input className="input" type="text" value={state.name} required  onChange={(e)=>{dispatch({type:"setName", value:e.target.value})}}/> </label>
-        <label>Email: <input className="input" type="email" value={state.email} required onChange={(e)=>{dispatch({type:"setEmail", value:e.target.value})}}/> </label>
-        <label>Age: <input className="input" type="number" value={state.age} required onChange={(e)=>{dispatch({type:"setAge", value:e.target.value})}}/> </label>
-        <button className="btn">Signup</button>
-      </form> */}
-
-      <hr />
-
-      <button className="btn" onClick={()=>setCount(count+1)}>Increment</button>
-      <p>Count: {count}</p>
-      <p>Loop Response: {heavyTask}</p>
-
-    
-  </>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>S No</th>
+            <th>
+              Id{" "}
+              <button className="btn" onClick={() => sortData("id")}>
+                ↕
+              </button>
+            </th>
+            <th>
+              Name{" "}
+              <button className="btn" onClick={() => sortData("name")}>
+                ↕
+              </button>
+            </th>
+            <th>
+              UserName{" "}
+              <button className="btn" onClick={() => sortData("username")}>
+                ↕
+              </button>
+            </th>
+            <th>Phone</th>
+            <th>E Mail</th>
+            <th>Website</th>
+            <th>Company</th>
+            <th>City</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((elem, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{elem.id}</td>
+              <td>{elem.name}</td>
+              <td>{elem.username}</td>
+              <td>{elem.phone}</td>
+              <td>{elem.email}</td>
+              <td>
+                <a href={`https://${elem.website}`} target="_blank">
+                  {elem.website}
+                </a>
+              </td>
+              <td>{elem.company.name}</td>
+              <td>
+                {}
+                {elem.address.city}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
